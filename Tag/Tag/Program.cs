@@ -10,51 +10,27 @@ namespace Tag
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите длину, которая будет равна ширине поля: ");
-            int sizeField = Convert.ToInt32(Console.ReadLine());
-            int[,] field = new int[sizeField,sizeField];
+                     
+            Game game = new Game(1,2,3,4,5,6,7,8,0);
 
-            RandomField(field, sizeField);
-
-            for (int i = 0; i < sizeField; i++)
-            {                
-                for (int j = 0; j < sizeField; j++)
-                {
-                    if (j < sizeField - 1)
-                    {
-                        Console.Write(field[i, j] + "/ ");
-                    }
-                    else
-                    {
-                        Console.Write(field[i, j] + "\n");
-                    }     
-                }
-            }
-            Console.ReadLine();
+            game.Print();
             
-        }
-        static int[,] RandomField(int[,] field,int sizeField)
-        {
-            /*int time = Convert.ToInt32(Math.Pow(sizeField,2) - 1);
-            for (int i = 0; i < sizeField; i++)
-            {
-                for (int j = 0; j < sizeField; j++)
-                {
-                    field[i, j] = time;
-                    time--;
-                }
-            }*/
-            Random gen = new Random();
-            for (int i = 0; i < sizeField; i++)
-            {
-                for (int j = 0; j < sizeField; j++)
-                {
 
-                }
+            Console.Write("Играть будем? (да/нет) ");
+            string text = Convert.ToString(Console.ReadLine());
+            if (text == "Да" || text == "да")
+            {             
+                Console.Clear();
+                game.GenerationField();
+
+                Console.Write("Введите число, которое хотите поменять ");
+                int value = Convert.ToInt32(Console.ReadLine());
+
+                game.GetLocation(value);
+
             }
-
-            return field;
+            else Console.WriteLine("Вы упустили шанс выиграть миллион");
+            Console.ReadLine();
         }
-
     }
 }

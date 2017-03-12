@@ -171,29 +171,28 @@ namespace Tag
             }
             else
                 return false;*/
-            int count = 0;
+            int count = 1;
             int c = 0;
-            if (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0)
-            {
+            
                 for (int i = 0; i < gameField.GetLength(0); i++)
                 {
                     for (int j = 0; j < gameField.GetLength(1); j++)
                     {
-                        if (gameField[i, j] == count++)
+                        if (gameField[i, j] == count)
                         {
                             c++;
                         }
                         count++;
                     }
                 }
-                if (c == 8)
+                if (c == 3 && (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0))
                 {
                     Console.WriteLine("Вы выиграли!");
                     return true;
                 }
                 else return false;
-            }
-            else return false;
+            
+            
                   
         }
     }

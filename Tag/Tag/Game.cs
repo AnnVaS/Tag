@@ -60,7 +60,7 @@ namespace Tag
                 }
             }
         }
-        public void GenerationField()
+        private void GenerationField()
         {
             int help = 0;            
             Random gen = new Random();
@@ -100,7 +100,7 @@ namespace Tag
             }                        
         }
 
-        public void Shift()
+        public void Shift(int value)
         {
             int[,] helpmas = new int[1, 1];
             int coordinateXZero = 0;
@@ -131,46 +131,8 @@ namespace Tag
             }
 
         }
-        public bool CheckWin()
-        {
-            /*int count = 0;
-            
-            for (int i = 0; i < gameField.GetLength(0); i++)
-            {
-                for (int j = 0; j < gameField.GetLength(1); j++)
-                {
-                    field[count] = gameField[i, j];
-                    count++;
-                }
-            }
-
-            count = 0;
-            for (int i = 0; i < field.Length; i++)
-            {
-                for (int j = 0; j < field.Length; j++)
-                {
-                    if ((i == field.Length - 1) || (j == field.Length - 1))
-                    {
-                    }
-                    else
-                    {
-                        if (j > i)
-                        {
-                            if (field[i] > field[j])
-                            {
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-            if (count < 1)
-            {
-                Console.WriteLine("Вы выйграли!!!");
-                return true;
-            }
-            else
-                return false;*/
+        public bool VerificationOfWinner()
+        {            
             int count = 1;
             int c = 0;
             
@@ -190,10 +152,7 @@ namespace Tag
                     Console.WriteLine("Вы выиграли!");
                     return true;
                 }
-                else return false;
-            
-            
-                  
+                else return false;    
         }
     }
 }

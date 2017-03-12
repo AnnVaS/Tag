@@ -12,15 +12,18 @@ namespace Tag
         {
                      
             Game game = new Game(1,2,3,4,5,6,7,8,0);
-                                 
-            Console.Clear();
+            
+
             while (!(game.CheckWin() == true))
             {
+                Console.Clear();
                 Console.WriteLine("Игра началась!\n");
                 game.Print();
                 Console.Write("Введите число, стоящее рядом с нулем,чтобы поменять их местами: ");
-                int value = Convert.ToInt32(Console.ReadLine());                
-            }
+                int value = Convert.ToInt32(Console.ReadLine());
+                game.GetLocation(value);
+                game.Shift();
+            } 
             Console.ReadLine();
         }
     }

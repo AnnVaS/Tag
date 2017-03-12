@@ -129,11 +129,11 @@ namespace Tag
                 gameField[moveX, moveY] = gameField[coordinateXZero, coordinateYZero];
                 gameField[coordinateXZero, coordinateYZero] = helpmas[0, 0];
             }
-            
+
         }
         public bool CheckWin()
         {
-            int count = 0;
+            /*int count = 0;
             
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
@@ -170,8 +170,31 @@ namespace Tag
                 return true;
             }
             else
-                return false;
-            
+                return false;*/
+            int count = 0;
+            int c = 0;
+            if (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0)
+            {
+                for (int i = 0; i < gameField.GetLength(0); i++)
+                {
+                    for (int j = 0; j < gameField.GetLength(1); j++)
+                    {
+                        if (gameField[i, j] == count++)
+                        {
+                            c++;
+                        }
+                        count++;
+                    }
+                }
+                if (c == 8)
+                {
+                    Console.WriteLine("Вы выиграли!");
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
+                  
         }
     }
 }

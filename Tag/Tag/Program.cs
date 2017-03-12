@@ -12,24 +12,15 @@ namespace Tag
         {
                      
             Game game = new Game(1,2,3,4,5,6,7,8,0);
-
-            game.Print();
-            
-
-            Console.Write("Играть будем? (да/нет) ");
-            string text = Convert.ToString(Console.ReadLine());
-            if (text == "Да" || text == "да")
-            {             
-                Console.Clear();
-                game.GenerationField();
-
-                Console.Write("Введите число, которое хотите поменять ");
-                int value = Convert.ToInt32(Console.ReadLine());
-
-                game.GetLocation(value);
-
+                                 
+            Console.Clear();
+            while (!(game.CheckWin() == true))
+            {
+                Console.WriteLine("Игра началась!\n");
+                game.Print();
+                Console.Write("Введите число, стоящее рядом с нулем,чтобы поменять их местами: ");
+                int value = Convert.ToInt32(Console.ReadLine());                
             }
-            else Console.WriteLine("Вы упустили шанс выиграть миллион");
             Console.ReadLine();
         }
     }

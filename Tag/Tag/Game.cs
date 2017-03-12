@@ -10,11 +10,15 @@ namespace Tag
     {
         private int[] field;
         private int[,] gameField;
+        private int moveX;
+        private int moveY;
 
-        public Game(params int[] fieldOld)
+        public Game(params int[] field)
         {
-            this.field = fieldOld;
-            CreateFieldOfGame();            
+            this.field = field;
+            CreateFieldOfGame();
+            GenerationField(); 
+
         }
 
         public void Print()
@@ -25,14 +29,14 @@ namespace Tag
                 {
                     if (j != Math.Sqrt(field.Length) - 1)
                     {
-                        Console.Write(gameField[i,j] + " ");
+                        Console.Write(gameField[i,j] + "  ");
                     }
-                    else Console.Write(gameField[i,j] + "\n");
+                    else Console.Write(gameField[i,j] + "\n\n");
                 }
             }
             Console.WriteLine();
         }
-        public void CreateFieldOfGame()
+        private void CreateFieldOfGame()
         {                       
             int sizeOfField = Convert.ToInt32(Math.Sqrt(field.Length));
             {
@@ -82,22 +86,92 @@ namespace Tag
         }
         public void GetLocation(int value)
         {
-           
-            int coordinateX=0;
-            int coordinateY=0;
+                       
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
                 for (int j = 0; j < gameField.GetLength(1); j++)
                 {
                     if (value == gameField[i, j])
                     {
-                        coordinateX = i;
-                        coordinateY = j;
+                        moveX = i;
+                        moveY = j;
                     }
                 }
             }                        
         }
-        public bool Verification()
-         
+
+        public void Shift()
+        {
+            int[,] helpmas = new int[1, 1];
+            int coordinateXZero = 0;
+            int coordinateYZero = 0;
+
+            for (int i = 0; i < gameField.GetLength(0); i++)
+            {
+                for (int j = 0; j < gameField.GetLength(1); j++)
+                {
+                    if (gameField[i, j]==0)
+                    {
+                        coordinateXZero = i;
+                        coordinateYZero = j;
+                    }
+                }
+            }
+            if (Math.Abs(moveX - coordinateXZero) == 1 && moveY == coordinateYZero)
+            {
+                helpmas[0, 0] = gameField[moveX, moveY];
+                gameField[moveX, moveY] = gameField[coordinateXZero, coordinateYZero];
+                gameField[coordinateXZero, coordinateYZero] = helpmas[0, 0];
+            }
+            if (Math.Abs(moveY - coordinateYZero) == 1 && moveX == coordinateXZero)
+            {
+                helpmas[0, 0] = gameField[moveX, moveY];
+                gameField[moveX, moveY] = gameField[coordinateXZero, coordinateYZero];
+                gameField[coordinateXZero, coordinateYZero] = helpmas[0, 0];
+            }
+            
+        }
+        public bool CheckWin()
+        {
+            int count = 0;
+            
+            for (int i = 0; i < gameField.GetLength(0); i++)
+            {
+                for (int j = 0; j < gameField.GetLength(1); j++)
+                {
+                    field[count] = gameField[i, j];
+                    count++;
+                }
+            }
+
+            count = 0;
+            for (int i = 0; i < field.Length; i++)
+            {
+                for (int j = 0; j < field.Length; j++)
+                {
+                    if ((i == field.Length - 1) || (j == field.Length - 1))
+                    {
+                    }
+                    else
+                    {
+                        if (j > i)
+                        {
+                            if (field[i] > field[j])
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+            if (count < 1)
+            {
+                Console.WriteLine("Вы выйграли!!!");
+                return true;
+            }
+            else
+                return false;
+            
+        }
     }
 }

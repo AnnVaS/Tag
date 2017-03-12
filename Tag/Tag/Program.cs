@@ -11,7 +11,7 @@ namespace Tag
         static void Main(string[] args)
         {
                      
-            Game game = new Game(1,2,3,0);            
+            Game game = new Game(1,2,3,4,5,6,7,8,0);            
 
             while (game.VerificationOfWinner() == false)
             {

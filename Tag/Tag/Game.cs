@@ -147,7 +147,7 @@ namespace Tag
                         count++;
                     }
                 }
-                if (c == 3 && (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0))
+                if (c == field.Length-1 && (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0))
                 {
                     Console.WriteLine("Вы выиграли!");
                     return true;

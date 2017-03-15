@@ -6,41 +6,25 @@ using System.Threading.Tasks;
 
 namespace Tag
 {
-    class Game
+        class Game
     {
         private int[] field;
-        private int[,] gameField;
+        public readonly int[,] gameField;
         private int moveX;
         private int moveY;
 
         public Game(params int[] field)
         {
             this.field = field;
+            gameField = new int[Convert.ToInt32(Math.Sqrt(field.Length)), Convert.ToInt32(Math.Sqrt(field.Length))];
             CreateFieldOfGame();
-            GenerationField(); 
-
+            GenerationField();
         }
 
-        public void Print()
-        {
-            for (int i = 0; i < Math.Sqrt(field.Length); i++)
-            {
-                for (int j = 0; j < Math.Sqrt(field.Length); j++)
-                {
-                    if (j != Math.Sqrt(field.Length) - 1)
-                    {
-                        Console.Write(gameField[i,j] + "  ");
-                    }
-                    else Console.Write(gameField[i,j] + "\n\n");
-                }
-            }
-            Console.WriteLine();
-        }
         private void CreateFieldOfGame()
-        {                       
+        {
             int sizeOfField = Convert.ToInt32(Math.Sqrt(field.Length));
             {
-                gameField = new int[sizeOfField, sizeOfField];
                 int helpCount = 0;
                 for (int i = 0; i < sizeOfField; i++)
                 {
@@ -60,11 +44,11 @@ namespace Tag
                 }
             }
         }
+
         private void GenerationField()
         {
-            int help = 0;            
+            int help = 0;
             Random gen = new Random();
-            
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
                 for (int j = 0; j < gameField.GetLength(1); j++)
@@ -81,12 +65,10 @@ namespace Tag
                     field[help] = -1;
                 }
             }
-            Print();
-
         }
+
         public void GetLocation(int value)
         {
-                       
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
                 for (int j = 0; j < gameField.GetLength(1); j++)
@@ -97,7 +79,7 @@ namespace Tag
                         moveY = j;
                     }
                 }
-            }                        
+            }
         }
 
         public void Shift(int value)
@@ -105,12 +87,11 @@ namespace Tag
             int[,] helpmas = new int[1, 1];
             int coordinateXZero = 0;
             int coordinateYZero = 0;
-
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
                 for (int j = 0; j < gameField.GetLength(1); j++)
                 {
-                    if (gameField[i, j]==0)
+                    if (gameField[i, j] == 0)
                     {
                         coordinateXZero = i;
                         coordinateYZero = j;
@@ -129,30 +110,31 @@ namespace Tag
                 gameField[moveX, moveY] = gameField[coordinateXZero, coordinateYZero];
                 gameField[coordinateXZero, coordinateYZero] = helpmas[0, 0];
             }
-
         }
+
         public bool VerificationOfWinner()
-        {            
+        {
             int count = 1;
             int c = 0;
-            
-                for (int i = 0; i < gameField.GetLength(0); i++)
+            for (int i = 0; i < gameField.GetLength(0); i++)
+            {
+                for (int j = 0; j < gameField.GetLength(1); j++)
                 {
-                    for (int j = 0; j < gameField.GetLength(1); j++)
+                    if (gameField[i, j] == count)
                     {
-                        if (gameField[i, j] == count)
-                        {
-                            c++;
-                        }
-                        count++;
+                        c++;
                     }
+                    count++;
                 }
-                if (c == field.Length-1 && (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0))
-                {
-                    Console.WriteLine("Вы выиграли!");
-                    return true;
-                }
-                else return false;    
+            }
+            if (c == field.Length - 1 && (gameField[gameField.GetLength(0) - 1, gameField.GetLength(1) - 1] == 0))
+            {
+                Console.WriteLine("Вы выиграли!");
+                return true;
+            }
+            else return false;
         }
+
     }
+
 }

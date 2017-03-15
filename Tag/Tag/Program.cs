@@ -10,20 +10,19 @@ namespace Tag
     {
         static void Main(string[] args)
         {
-                     
-            Game game = new Game(1,2,3,4,5,6,7,8,0);            
+            Game game = new Game(1, 2, 3, 4, 5, 6, 7, 8, 0);
 
             while (game.VerificationOfWinner() == false)
             {
                 Console.Clear();
                 Console.WriteLine("Игра началась!\n");
-                game.Print();
+                Print.Prints(game);
                 Console.Write("Введите число, стоящее рядом с нулем,чтобы поменять их местами: ");
                 int value = Convert.ToInt32(Console.ReadLine());
                 game.GetLocation(value);
                 game.Shift(value);
                 Console.Clear();
-            } 
+            }
             Console.ReadLine();
         }
     }
